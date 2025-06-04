@@ -1,0 +1,689 @@
+.
+├── Dockerfile
+├── README.md
+├── automatizacion.sh
+├── conferencia
+│   ├── __init__.py
+│   ├── __pycache__
+│   │   ├── __init__.cpython-310.pyc
+│   │   ├── __init__.cpython-311.pyc
+│   │   ├── __init__.cpython-312.pyc
+│   │   ├── admin.cpython-310.pyc
+│   │   ├── admin.cpython-311.pyc
+│   │   ├── admin.cpython-312.pyc
+│   │   ├── apps.cpython-310.pyc
+│   │   ├── apps.cpython-311.pyc
+│   │   ├── apps.cpython-312.pyc
+│   │   ├── forms.cpython-310.pyc
+│   │   ├── forms.cpython-311.pyc
+│   │   ├── forms.cpython-312.pyc
+│   │   ├── models.cpython-310.pyc
+│   │   ├── models.cpython-311.pyc
+│   │   ├── models.cpython-312.pyc
+│   │   ├── tests.cpython-310.pyc
+│   │   ├── urls.cpython-310.pyc
+│   │   ├── urls.cpython-311.pyc
+│   │   ├── urls.cpython-312.pyc
+│   │   ├── views.cpython-310.pyc
+│   │   ├── views.cpython-311.pyc
+│   │   └── views.cpython-312.pyc
+│   ├── admin.py
+│   ├── apps.py
+│   ├── forms.py
+│   ├── migrations
+│   │   ├── 0001_initial.py
+│   │   ├── 0002_conferencia_organizador.py
+│   │   ├── 0003_invitacionrevisor.py
+│   │   ├── 0004_invitacionrevisor_fecha_envio_and_more.py
+│   │   ├── 0005_conferencia_autor_conferencia_formulario_and_more.py
+│   │   ├── 0006_remove_conferencia_autor_and_more.py
+│   │   ├── 0007_conferencia_autor_alter_conferencia_organizador.py
+│   │   ├── 0008_conferencia_archivo_zip.py
+│   │   ├── 0009_alter_invitacionrevisor_conferencia.py
+│   │   ├── 0010_alter_invitacionrevisor_estado.py
+│   │   ├── 0011_alter_invitacionrevisor_estado.py
+│   │   ├── 0012_evaluacion.py
+│   │   ├── 0013_delete_evaluacion.py
+│   │   ├── 0014_conferencia_estado_revision.py
+│   │   ├── 0015_conferencia_trabajo_reportado.py
+│   │   ├── 0016_conferencia_categoria.py
+│   │   ├── __init__.py
+│   │   └── __pycache__
+│   │       ├── 0001_initial.cpython-310.pyc
+│   │       ├── 0001_initial.cpython-311.pyc
+│   │       ├── 0001_initial.cpython-312.pyc
+│   │       ├── 0002_conferencia_organizador.cpython-310.pyc
+│   │       ├── 0002_conferencia_organizador.cpython-311.pyc
+│   │       ├── 0002_conferencia_organizador.cpython-312.pyc
+│   │       ├── 0003_invitacionrevisor.cpython-310.pyc
+│   │       ├── 0003_invitacionrevisor.cpython-311.pyc
+│   │       ├── 0003_invitacionrevisor.cpython-312.pyc
+│   │       ├── 0004_invitacionrevisor_fecha_envio_and_more.cpython-310.pyc
+│   │       ├── 0004_invitacionrevisor_fecha_envio_and_more.cpython-311.pyc
+│   │       ├── 0004_invitacionrevisor_fecha_envio_and_more.cpython-312.pyc
+│   │       ├── 0005_conferencia_autor_conferencia_formulario_and_more.cpython-310.pyc
+│   │       ├── 0005_conferencia_autor_conferencia_formulario_and_more.cpython-311.pyc
+│   │       ├── 0005_conferencia_autor_conferencia_formulario_and_more.cpython-312.pyc
+│   │       ├── 0006_remove_conferencia_autor_and_more.cpython-310.pyc
+│   │       ├── 0006_remove_conferencia_autor_and_more.cpython-311.pyc
+│   │       ├── 0006_remove_conferencia_autor_and_more.cpython-312.pyc
+│   │       ├── 0007_conferencia_autor_alter_conferencia_organizador.cpython-310.pyc
+│   │       ├── 0007_conferencia_autor_alter_conferencia_organizador.cpython-311.pyc
+│   │       ├── 0007_conferencia_autor_alter_conferencia_organizador.cpython-312.pyc
+│   │       ├── 0008_conferencia_archivo_zip.cpython-310.pyc
+│   │       ├── 0008_conferencia_archivo_zip.cpython-311.pyc
+│   │       ├── 0008_conferencia_archivo_zip.cpython-312.pyc
+│   │       ├── 0009_alter_invitacionrevisor_conferencia.cpython-310.pyc
+│   │       ├── 0009_alter_invitacionrevisor_conferencia.cpython-311.pyc
+│   │       ├── 0009_alter_invitacionrevisor_conferencia.cpython-312.pyc
+│   │       ├── 0010_alter_invitacionrevisor_estado.cpython-310.pyc
+│   │       ├── 0011_alter_invitacionrevisor_estado.cpython-310.pyc
+│   │       ├── 0012_evaluacion.cpython-310.pyc
+│   │       ├── 0013_delete_evaluacion.cpython-310.pyc
+│   │       ├── 0014_conferencia_estado_revision.cpython-310.pyc
+│   │       ├── 0015_conferencia_trabajo_reportado.cpython-310.pyc
+│   │       ├── 0016_conferencia_categoria.cpython-310.pyc
+│   │       ├── __init__.cpython-310.pyc
+│   │       ├── __init__.cpython-311.pyc
+│   │       └── __init__.cpython-312.pyc
+│   ├── models.py
+│   ├── templates
+│   │   └── conferencia
+│   │       ├── conferencias_administrador.html
+│   │       ├── conferencias_autor.html
+│   │       ├── conferencias_organizador.html
+│   │       ├── conferencias_revisor.html
+│   │       ├── crear_conferencia.html
+│   │       ├── editar.html
+│   │       ├── invitaciones_conferencia.html
+│   │       └── subir_documentos.html
+│   ├── tests
+│   │   ├── __init__.py
+│   │   ├── __pycache__
+│   │   │   ├── __init__.cpython-310.pyc
+│   │   │   ├── test_forms.cpython-310.pyc
+│   │   │   └── test_views.cpython-310.pyc
+│   │   ├── test_forms.py
+│   │   └── test_views.py
+│   ├── urls.py
+│   └── views.py
+├── cora
+│   ├── __init__.py
+│   ├── __pycache__
+│   │   ├── __init__.cpython-310.pyc
+│   │   ├── __init__.cpython-311.pyc
+│   │   ├── __init__.cpython-312.pyc
+│   │   ├── settings.cpython-310.pyc
+│   │   ├── settings.cpython-311.pyc
+│   │   ├── settings.cpython-312.pyc
+│   │   ├── urls.cpython-310.pyc
+│   │   ├── urls.cpython-311.pyc
+│   │   ├── urls.cpython-312.pyc
+│   │   ├── wsgi.cpython-310.pyc
+│   │   ├── wsgi.cpython-311.pyc
+│   │   └── wsgi.cpython-312.pyc
+│   ├── asgi.py
+│   ├── settings.py
+│   ├── urls.py
+│   └── wsgi.py
+├── db.sqlite3
+├── desplegar.sh
+├── detener.sh
+├── docker-compose.yml
+├── formulario
+│   ├── __init__.py
+│   ├── __pycache__
+│   │   ├── __init__.cpython-310.pyc
+│   │   ├── __init__.cpython-311.pyc
+│   │   ├── __init__.cpython-312.pyc
+│   │   ├── admin.cpython-310.pyc
+│   │   ├── admin.cpython-311.pyc
+│   │   ├── admin.cpython-312.pyc
+│   │   ├── apps.cpython-310.pyc
+│   │   ├── apps.cpython-311.pyc
+│   │   ├── apps.cpython-312.pyc
+│   │   ├── models.cpython-310.pyc
+│   │   ├── models.cpython-311.pyc
+│   │   ├── models.cpython-312.pyc
+│   │   ├── tests.cpython-310.pyc
+│   │   ├── urls.cpython-310.pyc
+│   │   ├── urls.cpython-311.pyc
+│   │   ├── urls.cpython-312.pyc
+│   │   ├── views.cpython-310.pyc
+│   │   ├── views.cpython-311.pyc
+│   │   └── views.cpython-312.pyc
+│   ├── admin.py
+│   ├── apps.py
+│   ├── migrations
+│   │   ├── 0001_initial.py
+│   │   ├── 0002_evaluacion_respuesta_evaluacion.py
+│   │   ├── 0003_remove_evaluacion_fecha_alter_evaluacion_conferencia_and_more.py
+│   │   ├── 0004_alter_respuesta_evaluacion.py
+│   │   ├── 0005_alter_respuesta_evaluacion.py
+│   │   ├── __init__.py
+│   │   └── __pycache__
+│   │       ├── 0001_initial.cpython-310.pyc
+│   │       ├── 0001_initial.cpython-311.pyc
+│   │       ├── 0001_initial.cpython-312.pyc
+│   │       ├── 0002_evaluacion_respuesta_evaluacion.cpython-310.pyc
+│   │       ├── 0003_remove_evaluacion_fecha_alter_evaluacion_conferencia_and_more.cpython-310.pyc
+│   │       ├── 0004_alter_respuesta_evaluacion.cpython-310.pyc
+│   │       ├── 0005_alter_respuesta_evaluacion.cpython-310.pyc
+│   │       ├── __init__.cpython-310.pyc
+│   │       ├── __init__.cpython-311.pyc
+│   │       └── __init__.cpython-312.pyc
+│   ├── models.py
+│   ├── templates
+│   │   └── formulario
+│   │       ├── crear_formulario.html
+│   │       ├── evaluar_conferencia.html
+│   │       ├── ver_evaluacion.html
+│   │       └── ver_formulario.html
+│   ├── tests
+│   │   ├── __init__.py
+│   │   ├── __pycache__
+│   │   │   ├── __init__.cpython-310.pyc
+│   │   │   ├── test_forms.cpython-310.pyc
+│   │   │   └── test_views.cpython-310.pyc
+│   │   ├── test_forms.py
+│   │   └── test_views.py
+│   ├── urls.py
+│   └── views.py
+├── home
+│   ├── __init__.py
+│   ├── __pycache__
+│   │   ├── __init__.cpython-310.pyc
+│   │   ├── __init__.cpython-311.pyc
+│   │   ├── __init__.cpython-312.pyc
+│   │   ├── admin.cpython-310.pyc
+│   │   ├── admin.cpython-311.pyc
+│   │   ├── admin.cpython-312.pyc
+│   │   ├── apps.cpython-310.pyc
+│   │   ├── apps.cpython-311.pyc
+│   │   ├── apps.cpython-312.pyc
+│   │   ├── models.cpython-310.pyc
+│   │   ├── models.cpython-311.pyc
+│   │   ├── models.cpython-312.pyc
+│   │   ├── tests.cpython-310.pyc
+│   │   ├── urls.cpython-310.pyc
+│   │   ├── urls.cpython-311.pyc
+│   │   ├── urls.cpython-312.pyc
+│   │   ├── views.cpython-310.pyc
+│   │   ├── views.cpython-311.pyc
+│   │   └── views.cpython-312.pyc
+│   ├── admin.py
+│   ├── apps.py
+│   ├── migrations
+│   │   ├── __init__.py
+│   │   └── __pycache__
+│   │       ├── __init__.cpython-310.pyc
+│   │       ├── __init__.cpython-311.pyc
+│   │       └── __init__.cpython-312.pyc
+│   ├── models.py
+│   ├── templates
+│   │   ├── base.html
+│   │   └── home.html
+│   ├── tests
+│   │   ├── __init__.py
+│   │   ├── __pycache__
+│   │   │   ├── __init__.cpython-310.pyc
+│   │   │   └── test_views.cpython-310.pyc
+│   │   └── test_views.py
+│   ├── urls.py
+│   └── views.py
+├── htmlcov
+│   ├── class_index.html
+│   ├── coverage_html_cb_6fb7b396.js
+│   ├── favicon_32_cb_58284776.png
+│   ├── function_index.html
+│   ├── index.html
+│   ├── keybd_closed_cb_ce680311.png
+│   ├── status.json
+│   ├── style_cb_8e611ae1.css
+│   ├── z_109a08c8730a8fe9___init___py.html
+│   ├── z_109a08c8730a8fe9_test_forms_py.html
+│   ├── z_109a08c8730a8fe9_test_views_py.html
+│   ├── z_462efe70af71785a_0001_initial_py.html
+│   ├── z_462efe70af71785a_0002_alter_notificacion_mensaje_and_more_py.html
+│   ├── z_462efe70af71785a___init___py.html
+│   ├── z_4e983646a21a6928___init___py.html
+│   ├── z_4e983646a21a6928_apps_py.html
+│   ├── z_4e983646a21a6928_forms_py.html
+│   ├── z_4e983646a21a6928_models_py.html
+│   ├── z_4e983646a21a6928_views_py.html
+│   ├── z_5f4de721dcd93806___init___py.html
+│   ├── z_5f4de721dcd93806_apps_py.html
+│   ├── z_5f4de721dcd93806_models_py.html
+│   ├── z_5f4de721dcd93806_views_py.html
+│   ├── z_74884b0edef95dac___init___py.html
+│   ├── z_74884b0edef95dac_test_views_py.html
+│   ├── z_7c8c78b4c41fff90___init___py.html
+│   ├── z_7c8c78b4c41fff90_apps_py.html
+│   ├── z_7c8c78b4c41fff90_forms_py.html
+│   ├── z_7c8c78b4c41fff90_models_py.html
+│   ├── z_7c8c78b4c41fff90_views_py.html
+│   ├── z_89830f507b3319f2___init___py.html
+│   ├── z_89830f507b3319f2_apps_py.html
+│   ├── z_89830f507b3319f2_context_processors_py.html
+│   ├── z_89830f507b3319f2_models_py.html
+│   ├── z_89830f507b3319f2_views_py.html
+│   ├── z_9912fdae171b2be4___init___py.html
+│   ├── z_9912fdae171b2be4_test_forms_py.html
+│   ├── z_9912fdae171b2be4_test_views_py.html
+│   ├── z_a20243f409be1afc___init___py.html
+│   ├── z_a20243f409be1afc_apps_py.html
+│   ├── z_a20243f409be1afc_models_py.html
+│   ├── z_a20243f409be1afc_tests_py.html
+│   ├── z_a20243f409be1afc_views_py.html
+│   ├── z_a58c4a6dd5ee7a73___init___py.html
+│   ├── z_b55495966abf0a2a_0001_initial_py.html
+│   ├── z_b55495966abf0a2a_0002_evaluacion_respuesta_evaluacion_py.html
+│   ├── z_b55495966abf0a2a_0003_remove_evaluacion_fecha_alter_evaluacion_conferencia_and_more_py.html
+│   ├── z_b55495966abf0a2a_0004_alter_respuesta_evaluacion_py.html
+│   ├── z_b55495966abf0a2a_0005_alter_respuesta_evaluacion_py.html
+│   ├── z_b55495966abf0a2a___init___py.html
+│   ├── z_c325306950978e5e___init___py.html
+│   ├── z_c325306950978e5e_settings_py.html
+│   ├── z_c325306950978e5e_wsgi_py.html
+│   ├── z_c4d3825dde7b2948_0001_initial_py.html
+│   ├── z_c4d3825dde7b2948_0002_conferencia_organizador_py.html
+│   ├── z_c4d3825dde7b2948_0003_invitacionrevisor_py.html
+│   ├── z_c4d3825dde7b2948_0004_invitacionrevisor_fecha_envio_and_more_py.html
+│   ├── z_c4d3825dde7b2948_0005_conferencia_autor_conferencia_formulario_and_more_py.html
+│   ├── z_c4d3825dde7b2948_0006_remove_conferencia_autor_and_more_py.html
+│   ├── z_c4d3825dde7b2948_0007_conferencia_autor_alter_conferencia_organizador_py.html
+│   ├── z_c4d3825dde7b2948_0008_conferencia_archivo_zip_py.html
+│   ├── z_c4d3825dde7b2948_0009_alter_invitacionrevisor_conferencia_py.html
+│   ├── z_c4d3825dde7b2948_0010_alter_invitacionrevisor_estado_py.html
+│   ├── z_c4d3825dde7b2948_0011_alter_invitacionrevisor_estado_py.html
+│   ├── z_c4d3825dde7b2948_0012_evaluacion_py.html
+│   ├── z_c4d3825dde7b2948_0013_delete_evaluacion_py.html
+│   ├── z_c4d3825dde7b2948_0014_conferencia_estado_revision_py.html
+│   ├── z_c4d3825dde7b2948_0015_conferencia_trabajo_reportado_py.html
+│   ├── z_c4d3825dde7b2948___init___py.html
+│   ├── z_fa44321b030214c5___init___py.html
+│   ├── z_fa44321b030214c5_test_forms_py.html
+│   └── z_fa44321b030214c5_test_views_py.html
+├── manage.py
+├── media
+│   └── conferencias_zips
+│       ├── MelonMix-windows-x86_641.zip
+│       ├── MelonMix-windows-x86_641_0YrcDbS.zip
+│       ├── Presentacion_avance_1.zip
+│       ├── Presentacion_avance_1_TTiecj9.zip
+│       ├── doc.zip
+│       ├── doc_1RhvUpM.zip
+│       ├── doc_3ZQ4TAw.zip
+│       ├── doc_441NoE3.zip
+│       ├── doc_4boxIK4.zip
+│       ├── doc_5mkgdNz.zip
+│       ├── doc_6R9io72.zip
+│       ├── doc_7p4yy23.zip
+│       ├── doc_7sL9xLQ.zip
+│       ├── doc_7vzm9CC.zip
+│       ├── doc_8XBwcwB.zip
+│       ├── doc_8ZCx9db.zip
+│       ├── doc_95Yyywh.zip
+│       ├── doc_9uVDNn5.zip
+│       ├── doc_AO3Um2G.zip
+│       ├── doc_BO0EMFH.zip
+│       ├── doc_BUMSXi2.zip
+│       ├── doc_BeV1vD6.zip
+│       ├── doc_CZdgCl5.zip
+│       ├── doc_CstJBN1.zip
+│       ├── doc_CuEXUHS.zip
+│       ├── doc_DCtGRze.zip
+│       ├── doc_DJdCnYI.zip
+│       ├── doc_DudEzSa.zip
+│       ├── doc_GIPOAhg.zip
+│       ├── doc_HYjCcau.zip
+│       ├── doc_J8EQZf2.zip
+│       ├── doc_JWwiGMI.zip
+│       ├── doc_Ji8ODqh.zip
+│       ├── doc_LLdKCPw.zip
+│       ├── doc_LVd8a0o.zip
+│       ├── doc_LgrAmCM.zip
+│       ├── doc_NBumds2.zip
+│       ├── doc_NXhZgZW.zip
+│       ├── doc_NyrSR6q.zip
+│       ├── doc_Od47LXM.zip
+│       ├── doc_OsnYX5y.zip
+│       ├── doc_OzknQst.zip
+│       ├── doc_P0OUEc8.zip
+│       ├── doc_PQfuV8d.zip
+│       ├── doc_PmWq8LR.zip
+│       ├── doc_RhuXo1o.zip
+│       ├── doc_T1EWCYp.zip
+│       ├── doc_UU4nLvC.zip
+│       ├── doc_UdL76Hv.zip
+│       ├── doc_Vq37zZD.zip
+│       ├── doc_WydVknQ.zip
+│       ├── doc_ZKmzzUq.zip
+│       ├── doc_aa8S98H.zip
+│       ├── doc_ajfUojC.zip
+│       ├── doc_bypmwD4.zip
+│       ├── doc_cKIqwZf.zip
+│       ├── doc_dbtLwbJ.zip
+│       ├── doc_g1CgSrT.zip
+│       ├── doc_gvcIwhB.zip
+│       ├── doc_hJEbiKI.zip
+│       ├── doc_jAbbfRt.zip
+│       ├── doc_jo6PqQA.zip
+│       ├── doc_jyAowGw.zip
+│       ├── doc_k0P9QSZ.zip
+│       ├── doc_kI3VXGd.zip
+│       ├── doc_kKYxgz8.zip
+│       ├── doc_m0J7kEk.zip
+│       ├── doc_mPN6WOt.zip
+│       ├── doc_ncayOBm.zip
+│       ├── doc_nufw3GB.zip
+│       ├── doc_oySH5I6.zip
+│       ├── doc_qI5UyR3.zip
+│       ├── doc_sCMj6Zi.zip
+│       ├── doc_sZ8CCem.zip
+│       ├── doc_seotIBQ.zip
+│       ├── doc_t14bYtF.zip
+│       ├── doc_tG5cyBP.zip
+│       ├── doc_vHrzDPs.zip
+│       ├── doc_vgnBiX7.zip
+│       ├── doc_wHZ37Kq.zip
+│       ├── doc_wP4xCUT.zip
+│       ├── doc_zJ2MjGy.zip
+│       ├── doc_zyKnTEN.zip
+│       ├── easy-chair-uaz-frontend.zip
+│       ├── fontedit.zip
+│       ├── fontedit_I4Grp6t.zip
+│       └── fontedit_P1mFjgV.zip
+├── notificaciones
+│   ├── __init__.py
+│   ├── __pycache__
+│   │   ├── __init__.cpython-310.pyc
+│   │   ├── admin.cpython-310.pyc
+│   │   ├── apps.cpython-310.pyc
+│   │   ├── context_processors.cpython-310.pyc
+│   │   ├── models.cpython-310.pyc
+│   │   ├── urls.cpython-310.pyc
+│   │   └── views.cpython-310.pyc
+│   ├── admin.py
+│   ├── apps.py
+│   ├── context_processors.py
+│   ├── migrations
+│   │   ├── 0001_initial.py
+│   │   ├── 0002_alter_notificacion_mensaje_and_more.py
+│   │   ├── __init__.py
+│   │   └── __pycache__
+│   │       ├── 0001_initial.cpython-310.pyc
+│   │       ├── 0002_alter_notificacion_mensaje_and_more.cpython-310.pyc
+│   │       └── __init__.cpython-310.pyc
+│   ├── models.py
+│   ├── templates
+│   │   └── notificaciones
+│   │       └── _dropdown.html
+│   ├── tests
+│   │   ├── __init__.py
+│   │   ├── __pycache__
+│   │   │   ├── __init__.cpython-310.pyc
+│   │   │   └── test_views.cpython-310.pyc
+│   │   └── test_views.py
+│   ├── urls.py
+│   └── views.py
+├── pruebas_aceptacion
+│   ├── CORA
+│   │   └── features
+│   │       ├── files
+│   │       │   ├── fontedit.zip
+│   │       │   └── imagen.jpg
+│   │       └── steps
+│   │           ├── asignacion_roles.py
+│   │           ├── asignacion_roles_cora.feature
+│   │           ├── cambiar_info_conferencia.py
+│   │           ├── cambiar_informacion_conferencia_cora.feature
+│   │           ├── inicio_sesion.py
+│   │           ├── invitar_revisores_manualmente.feature
+│   │           ├── login.py
+│   │           ├── login_cora.feature
+│   │           ├── manejo_envios.feature
+│   │           ├── registro_usuario.py
+│   │           ├── registro_usuario_cora.feature
+│   │           ├── subir_archivos.py
+│   │           └── subir_archivos_conferencia.feature
+│   ├── CORA - Testing
+│   │   └── features
+│   │       └── steps
+│   │           ├── asignacion_roles.py
+│   │           ├── asignacion_roles_cora.feature
+│   │           ├── cambiar_info_conferencia.py
+│   │           ├── cambiar_informacion_conferencia_cora.feature
+│   │           ├── cambiar_revision_proporcionar_retroalimentacion.feature
+│   │           ├── creacion_conferencia_cora.feature
+│   │           ├── creacion_formulario_evaluacion.feature
+│   │           ├── eliminar_conferencia_cora.feature
+│   │           ├── evaluacion_trabajo_asignado.feature
+│   │           ├── inicio_sesion.py
+│   │           ├── invitar_revisores_manualmente.feature
+│   │           ├── login.py
+│   │           ├── login_cora.feature
+│   │           ├── manejo_envios.feature
+│   │           ├── notificaciones.feature
+│   │           ├── reasignar_documentos_conferencias.feature
+│   │           ├── registro_usuario.py
+│   │           ├── registro_usuario_cora.feature
+│   │           ├── reportar_eliminar_archivos_inadecuados.feature
+│   │           ├── responder_invitacion.feature
+│   │           ├── restablecer_contraseña_cora.feature
+│   │           ├── selenium_tests.py
+│   │           └── subir_archivos_conferencia.feature
+│   └── Templates de Prueba sin codificar
+│       ├── alerta_datos_incorrectos.feature
+│       ├── asignacion_roles_cora.feature
+│       ├── cambiar_fechas_envio.feature
+│       ├── cambiar_informacion_conferencia_cora.feature
+│       ├── creacion_conferencia_cora.feature
+│       ├── creacion_formulario_evaluacion.feature
+│       ├── eliminar_conferencia_cora.feature
+│       ├── evaluacion_trabajo_asignado.feature
+│       ├── invitar_revisores_manualmente.feature
+│       ├── notificaciones.feature
+│       ├── reasignar_documentos_conferencias.feature
+│       ├── reportar_eliminar_archivos_inadecuados.feature
+│       ├── responder_invitacion.feature
+│       ├── restablecer_contraseña_cora.feature
+│       ├── revision.feature
+│       └── subir_archivos_conferencia.feature
+├── requirements.txt
+├── static
+│   ├── assets
+│   │   ├── bootstrap
+│   │   │   ├── css
+│   │   │   │   └── bootstrap.min.css
+│   │   │   └── js
+│   │   │       └── bootstrap.min.js
+│   │   ├── css
+│   │   │   ├── custom.css
+│   │   │   └── demo.css
+│   │   ├── img
+│   │   │   ├── avatars
+│   │   │   │   ├── 1.png
+│   │   │   │   ├── 5.png
+│   │   │   │   ├── 6.png
+│   │   │   │   └── 7.png
+│   │   │   ├── backgrounds
+│   │   │   │   ├── 18.jpg
+│   │   │   │   └── Cozcyt.jpg
+│   │   │   ├── elements
+│   │   │   │   ├── 1.jpg
+│   │   │   │   ├── 11.jpg
+│   │   │   │   ├── 12.jpg
+│   │   │   │   ├── 13.jpg
+│   │   │   │   ├── 17.jpg
+│   │   │   │   ├── 18.jpg
+│   │   │   │   ├── 19.jpg
+│   │   │   │   ├── 2.jpg
+│   │   │   │   ├── 20.jpg
+│   │   │   │   ├── 3.jpg
+│   │   │   │   ├── 4.jpg
+│   │   │   │   ├── 5.jpg
+│   │   │   │   └── 7.jpg
+│   │   │   ├── favicon
+│   │   │   │   ├── favicon.ico
+│   │   │   │   └── logo.ico
+│   │   │   ├── footer
+│   │   │   │   ├── logoUaz.png
+│   │   │   │   └── logouaznegro.png
+│   │   │   ├── icons
+│   │   │   │   ├── brands
+│   │   │   │   │   ├── asana.png
+│   │   │   │   │   ├── behance.png
+│   │   │   │   │   ├── dribbble.png
+│   │   │   │   │   ├── facebook.png
+│   │   │   │   │   ├── github.png
+│   │   │   │   │   ├── google.png
+│   │   │   │   │   ├── instagram.png
+│   │   │   │   │   ├── mailchimp.png
+│   │   │   │   │   ├── slack.png
+│   │   │   │   │   └── twitter.png
+│   │   │   │   └── unicons
+│   │   │   │       ├── Menu_icon.png
+│   │   │   │       ├── cc-primary.png
+│   │   │   │       ├── cc-success.png
+│   │   │   │       ├── cc-warning.png
+│   │   │   │       ├── chart-success.png
+│   │   │   │       ├── chart.png
+│   │   │   │       ├── paypal.png
+│   │   │   │       ├── wallet-info.png
+│   │   │   │       └── wallet.png
+│   │   │   ├── illustrations
+│   │   │   │   ├── girl-doing-yoga-light.png
+│   │   │   │   ├── man-with-laptop-light.png
+│   │   │   │   └── page-misc-error-light.png
+│   │   │   ├── layouts
+│   │   │   │   ├── layout-container-light.png
+│   │   │   │   ├── layout-fluid-light.png
+│   │   │   │   ├── layout-without-menu-light.png
+│   │   │   │   └── layout-without-navbar-light.png
+│   │   │   └── logos
+│   │   │       ├── icon_whatsapp.svg
+│   │   │       ├── labsol.png
+│   │   │       ├── labsol_grande.png
+│   │   │       ├── labsol_grande2.png
+│   │   │       ├── quantum.png
+│   │   │       ├── quantum_grande.png
+│   │   │       ├── zigzag.png
+│   │   │       └── zigzag_grande.png
+│   │   ├── js
+│   │   │   ├── config.js
+│   │   │   ├── dashboards-analytics.js
+│   │   │   ├── extended-ui-perfect-scrollbar.js
+│   │   │   ├── form-basic-inputs.js
+│   │   │   ├── main.js
+│   │   │   ├── pages-account-settings-account.js
+│   │   │   ├── ui-modals.js
+│   │   │   ├── ui-popover.js
+│   │   │   └── ui-toasts.js
+│   │   └── vendor
+│   │       ├── css
+│   │       │   ├── core.css
+│   │       │   ├── pages
+│   │       │   │   ├── page-account-settings.css
+│   │       │   │   ├── page-auth.css
+│   │       │   │   ├── page-icons.css
+│   │       │   │   └── page-misc.css
+│   │       │   └── theme-default.css
+│   │       ├── fonts
+│   │       │   ├── boxicons
+│   │       │   │   ├── boxicons.eot
+│   │       │   │   ├── boxicons.svg
+│   │       │   │   ├── boxicons.ttf
+│   │       │   │   ├── boxicons.woff
+│   │       │   │   └── boxicons.woff2
+│   │       │   └── boxicons.css
+│   │       ├── js
+│   │       │   ├── bootstrap.js
+│   │       │   ├── helpers.js
+│   │       │   └── menu.js
+│   │       └── libs
+│   │           ├── apex-charts
+│   │           │   ├── apex-charts.css
+│   │           │   └── apexcharts.js
+│   │           ├── highlight
+│   │           │   ├── highlight-github.css
+│   │           │   ├── highlight.css
+│   │           │   └── highlight.js
+│   │           ├── jquery
+│   │           │   └── jquery.js
+│   │           ├── masonry
+│   │           │   └── masonry.js
+│   │           ├── perfect-scrollbar
+│   │           │   ├── perfect-scrollbar.css
+│   │           │   └── perfect-scrollbar.js
+│   │           └── popper
+│   │               └── popper.js
+│   ├── bootstrap
+│   │   └── css
+│   │       └── bootstrap.min.css
+│   ├── js
+│   │   ├── bootstrap.js
+│   │   ├── helpers.js
+│   │   └── menu.js
+│   └── tasks
+│       ├── build.js
+│       └── prod.js
+├── tree.txt
+└── usuarios
+    ├── __init__.py
+    ├── __pycache__
+    │   ├── __init__.cpython-310.pyc
+    │   ├── __init__.cpython-311.pyc
+    │   ├── __init__.cpython-312.pyc
+    │   ├── admin.cpython-310.pyc
+    │   ├── admin.cpython-311.pyc
+    │   ├── admin.cpython-312.pyc
+    │   ├── apps.cpython-310.pyc
+    │   ├── apps.cpython-311.pyc
+    │   ├── apps.cpython-312.pyc
+    │   ├── backends.cpython-310.pyc
+    │   ├── forms.cpython-310.pyc
+    │   ├── forms.cpython-311.pyc
+    │   ├── forms.cpython-312.pyc
+    │   ├── models.cpython-310.pyc
+    │   ├── models.cpython-311.pyc
+    │   ├── models.cpython-312.pyc
+    │   ├── tests.cpython-310.pyc
+    │   ├── urls.cpython-310.pyc
+    │   ├── urls.cpython-311.pyc
+    │   ├── urls.cpython-312.pyc
+    │   ├── views.cpython-310.pyc
+    │   ├── views.cpython-311.pyc
+    │   └── views.cpython-312.pyc
+    ├── admin.py
+    ├── apps.py
+    ├── forms.py
+    ├── models.py
+    ├── templates
+    │   ├── registration
+    │   │   ├── password_reset_complete.html
+    │   │   ├── password_reset_confirm.html
+    │   │   ├── password_reset_done.html
+    │   │   └── password_reset_form.html
+    │   └── usuarios
+    │       ├── admin_dashboard.html
+    │       ├── home.html
+    │       ├── invitaciones.html
+    │       ├── login.html
+    │       ├── registro.html
+    │       ├── vistaAdmin.html
+    │       ├── vistaAutor.html
+    │       ├── vistaOrganizador.html
+    │       └── vistaRevisor.html
+    ├── tests
+    │   ├── __init__.py
+    │   ├── __pycache__
+    │   │   ├── __init__.cpython-310.pyc
+    │   │   ├── test_forms.cpython-310.pyc
+    │   │   └── test_views.cpython-310.pyc
+    │   ├── test_forms.py
+    │   └── test_views.py
+    ├── urls.py
+    └── views.py
+
+89 directories, 598 files
