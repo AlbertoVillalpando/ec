@@ -1,0 +1,183 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>{% block title %}Mi Proyecto{% endblock %}</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Estilos -->
+  <link rel="stylesheet" href="{% static 'assets/bootstrap/css/bootstrap.min.css' %}" />
+  <link rel="stylesheet" href="{% static 'assets/vendor/css/core.css' %}" />
+  <link rel="stylesheet" href="{% static 'assets/vendor/css/theme-default.css' %}" />
+  <link rel="stylesheet" href="{% static 'assets/vendor/fonts/boxicons.css' %}" />
+  <link rel="stylesheet" href="{% static 'assets/css/demo.css' %}" />
+  <link rel="stylesheet" href="{% static 'assets/css/custom.css' %}" />
+  <link rel="stylesheet" href="{% static 'assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css' %}" />
+
+  <style>
+  .notification-indicator {
+    position: relative;
+  }
+  .notification-indicator .dot {
+    position: absolute;
+    top: 5px;
+    right: 2px;
+    height: 10px;
+    width: 10px;
+    background-color: red;
+    border-radius: 50%;
+    animation: pulse 1s infinite;
+  }
+
+  @keyframes pulse {
+    0% { transform: scale(1); opacity: 0.8; }
+    50% { transform: scale(1.5); opacity: 0.4; }
+    100% { transform: scale(1); opacity: 0.8; }
+  }
+</style>
+
+</head>
+
+<body>
+  <div class="layout-wrapper layout-content-navbar ">
+    <div class="layout-container">
+
+      <!-- Menú lateral -->
+      <aside id="layout-menu" class="layout-menu menu-vertical bg-secondary">
+        <div class="app-brand py-3">
+          <a href="#" class="app-brand-link">
+            <img src="{% static 'assets/img/footer/logouaznegro.png' %}" width="120" />
+          </a>
+        </div>
+
+          <ul class="menu-inner py-1">
+            {% block sidebar_extra %}{% endblock %}
+          </ul>
+      </aside>
+
+      <!-- Contenido -->
+      <div class="layout-page">
+
+        <!-- Barra superior -->
+        <nav class="layout-navbar navbar navbar-expand-xl bg-navbar-theme">
+          <div class="container-fluid">
+            <span class="navbar-brand mb-0 h1">{% block headerpagina %}Panel principal{% endblock %}</span>
+
+
+
+            <ul class="navbar-nav ms-auto align-items-center">
+
+            <li class="nav-item dropdown position-relative">
+              <a class="nav-link dropdown-toggle text-dark" href="#" id="notificacionesDropdown" role="button"
+                data-bs-toggle="dropdown" aria-expanded="false" onclick="marcarNotificacionesLeidas()">
+                🔔 Notificaciones
+                {% if notificaciones_no_leidas %}
+                <span id="badgeNotificaciones" class="position-absolute top-0 start-100 translate-middle p-1 bg-danger border border-light rounded-circle">
+                  <span class="visually-hidden">Nuevas notificaciones</span>
+                </span>
+                {% endif %}
+              </a>
+              <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="notificacionesDropdown" style="min-width: 250px;">
+                {% if notificaciones_usuario %}
+                  {% for notificacion in notificaciones_usuario %}
+                    <li>
+                      <a class="dropdown-item {% if not notificacion.leida %}fw-bold{% endif %}" href="#">
+                        {{ notificacion.mensaje }}
+                        <br>
+                        <small class="text-muted">{{ notificacion.fecha|date:"d M Y H:i" }}</small>
+                      </a>
+                    </li>
+                  {% endfor %}
+                {% else %}
+                  <li><span class="dropdown-item text-muted">No hay notificaciones</span></li>
+                {% endif %}
+              </ul>
+            </li>
+
+              <!-- Menú desplegable de paneles -->
+
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle text-dark" href="#" id="panelDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Paneles
+                </a>
+                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="panelDropdown">
+                  {% if is_administrador %}
+                  <li><a class="dropdown-item" href="{% url 'vistaAdmin' %}">Panel Administrador</a></li>
+                  {% endif %}
+                  {% if is_revisor %}
+                  <li><a class="dropdown-item" href="{% url 'vistaRevisor' %}">Panel Revisor</a></li>
+                  {% endif %}
+                  {% if is_organizador %}
+                  <li><a class="dropdown-item" href="{% url 'vistaOrganizador' %}">Panel Organizador</a></li>
+                  {% endif %}
+                  <li><a class="dropdown-item" href="{% url 'vistaAutor' %}">Panel Autor</a></li>
+                </ul>
+              </li>
+
+              <!-- Usuario y logout -->
+              <li class="nav-item">
+                <span class="nav-link text-dark">{{ request.user.username }}</span>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-dark" href="{% url 'logout' %}">Cerrar sesión</a>
+              </li>
+            </ul>
+          </div>
+        </nav>
+
+        <!-- Contenido de la página -->
+        <div class="container-xxl flex-grow-1 container-p-y">
+          {% block content %}{% endblock %}
+        </div>
+
+        <!-- Footer -->
+        {% block footer %}
+        <footer class="content-footer footer bg-footer-theme text-center py-3">
+          <div class="d-flex justify-content-between align-items-center px-4">
+            <span>Universidad autonoma de zacatecas</span>
+            <img src="{% static 'assets/img/footer/logouaz.png' %}" style="width: 50px;">
+          </div>
+        </footer>
+        {% endblock %}
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="{% static 'assets/vendor/libs/jquery/jquery.js' %}"></script>
+  <script src="{% static 'assets/vendor/libs/popper/popper.js' %}"></script>
+  <script src="{% static 'assets/vendor/js/bootstrap.js' %}"></script>
+  <script src="{% static 'assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js' %}"></script>
+  <script src="{% static 'assets/vendor/js/menu.js' %}"></script>
+  <script src="{% static 'assets/js/main.js' %}"></script>
+
+  <script>
+      function marcarNotificacionesLeidas() {
+        // Ocultar badge visualmente
+        const badge = document.getElementById('badgeNotificaciones');
+        if (badge) {
+          badge.style.display = 'none';
+        }
+
+        // Opcional: hacer una llamada AJAX para marcar como leídas en backend
+        fetch('/notificaciones/marcar-leidas/', {
+          method: 'POST',
+          headers: {
+            'X-CSRFToken': '{{ csrf_token }}',
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ marcar: true })
+        })
+        .then(response => {
+          if (!response.ok) {
+            console.error('Error marcando notificaciones como leídas');
+          }
+        })
+        .catch(error => console.error('Fetch error:', error));
+      }
+    </script>
+
+</body>
+</html>

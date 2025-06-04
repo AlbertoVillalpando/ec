@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="{% static 'css/azul.css' %}">
+{% endblock %}
+
+{% block content %}
+<a href="{% url 'conferencias_autor' %}" class="azul-link d-inline-block mb-4">
+  <i class="bi bi-arrow-left"></i> Volver a Conferencias
+</a>
+
+<h2 class="azul-header fw-bold mb-4">
+  Subir documentos para <strong>{{ conferencia.nombre }}</strong>
+</h2>
+
+<div class="card azul-card shadow p-4">
+  <div class="card-body">
+    <form method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      <div class="mb-3">
+        <label for="archivo" class="form-label azul-label">Archivo ZIP</label>
+        <input type="file" name="archivo" id="archivo" class="form-control border-primary" accept=".zip" required>
+        <div class="form-text">Sube un archivo comprimido en formato <strong>.zip</strong></div>
+      </div>
+      <div class="text-end">
+        <button type="submit" class="azul-btn">
+          <i class="bi bi-upload"></i> Subir
+        </button>
+      </div>
+    </form>
+
+    {% if messages %}
+      <div class="mt-4">
+        {% for message in messages %}
+          <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar"></button>
+          </div>
+        {% endfor %}
+      </div>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

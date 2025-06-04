@@ -1,0 +1,38 @@
+{% extends 'usuarios/vistaAutor.html' %}
+{% block title %}Mis Conferencias como Autor{% endblock %}
+
+{% block content %}
+<h2>Mis Conferencias como Autor</h2>
+
+<div class="table-responsive">
+  <table class="table table-bordered align-middle table-hover">
+    <thead class="table-light">
+      <tr>
+        <th>Nombre</th>
+        <th>Duración</th>
+        <th class="text-center">Opciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for conf in conferencias %}
+        <tr>
+          <td>{{ conf.nombre }}</td>
+          <td>{{ conf.meses }} meses, {{ conf.dias }} días, {{ conf.horas }} horas, {{ conf.minutos }} minutos</td>
+          <td class="text-center">
+            <div class="d-flex flex-wrap justify-content-center gap-2">
+              <a href="{% url 'subir_documentos' conf.id %}" class="btn btn-outline-success btn-sm">📤 Subir</a>
+              {% if conf.archivo_zip %}
+                <a href="{{ conf.archivo_zip.url }}" class="btn btn-outline-secondary btn-sm" download>⬇️ Archivo</a>
+              {% endif %}
+            </div>
+          </td>
+        </tr>
+      {% empty %}
+        <tr>
+          <td colspan="3" class="text-center text-muted">No se han registrado conferencias hasta el momento.</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

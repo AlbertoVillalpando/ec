@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="container mt-5">
+    <h2 class="mb-4 fw-bold text-custom-primary">
+      Crear formulario para <strong>{{ conferencia.nombre }}</strong>
+    </h2>
+
+    <!-- Preguntas ya creadas -->
+    {% if preguntas_existentes %}
+      <div class="card mb-5 shadow-sm border-0 rounded-4">
+        <div class="card-header bg-custom-primary text-white fw-semibold rounded-top">
+          Preguntas existentes
+        </div>
+        <ul class="list-group list-group-flush">
+          {% for pregunta in preguntas_existentes %}
+            <li class="list-group-item fs-5 py-3">
+              <span class="badge bg-custom-primary me-3 rounded-pill">{{ forloop.counter }}</span> {{ pregunta.texto }}
+            </li>
+          {% endfor %}
+        </ul>
+      </div>
+    {% endif %}
+
+    <!-- Formulario para nuevas preguntas -->
+    <div class="card shadow-sm border-0 rounded-4">
+      <div class="card-body">
+        <form method="post" class="needs-validation" novalidate>
+          {% csrf_token %}
+          <h5 class="mb-4 fw-semibold text-custom-primary">Agregar nuevas preguntas</h5>
+
+          <div id="preguntas-container">
+            <input
+              type="text"
+              name="preguntas"
+              class="form-control form-control-lg mb-3"
+              placeholder="Pregunta 1"
+              required
+              autofocus
+            >
+          </div>
+
+          <div class="d-flex flex-column flex-sm-row gap-3 mt-4">
+            <button
+              type="button"
+              class="btn btn-outline-custom-primary rounded-pill flex-grow-1 flex-sm-grow-0"
+              onclick="agregarPregunta()"
+            >
+              <i class="bi bi-plus-circle me-2"></i> Agregar otra pregunta
+            </button>
+
+            <button
+              type="submit"
+              class="btn btn-custom-primary rounded-pill flex-grow-1 flex-sm-grow-0"
+            >
+              <i class="bi bi-check-lg me-2"></i> Guardar preguntas
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function agregarPregunta() {
+      const container = document.getElementById('preguntas-container');
+      const count = container.children.length + 1;
+      const input = document.createElement('input');
+      input.type = 'text';
+      input.name = 'preguntas';
+      input.className = 'form-control form-control-lg mb-3';
+      input.placeholder = 'Pregunta ' + count;
+      input.required = true;
+      container.appendChild(input);
+      input.focus();
+    }
+
+    // Bootstrap form validation
+    (() => {
+      'use strict'
+      const forms = document.querySelectorAll('.needs-validation')
+      Array.from(forms).forEach(form => {
+        form.addEventListener('submit', event => {
+          if (!form.checkValidity()) {
+            event.preventDefault()
+            event.stopPropagation()
+          }
+          form.classList.add('was-validated')
+        }, false)
+      })
+    })()
+  </script>
+{% endblock %}

@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %}Panel de Revisor{% endblock %}
+
+{% block headerpagina %}Panel de Revisor{% endblock %}
+
+{% block content %}
+    <h1>Bienvenido, Revisor</h1>
+    <p>Este es el panel de Revisor.</p>
+{% endblock %}
+
+{% block sidebar_extra %}
+    <li class="menu-item">
+    <a href="{% url 'conferencias_revisor' %}" class="menu-link">
+        <i class="menu-icon tf-icons bx bx-envelope text-dark"></i>
+        <div class="text-dark">Ver conferencias</div>
+    </a>
+    </li>
+{% endblock %}

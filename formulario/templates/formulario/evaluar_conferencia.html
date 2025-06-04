@@ -1,0 +1,62 @@
+{% extends 'usuarios/vistaRevisor.html' %}
+
+{% block content %}
+  <div class="container mt-4">
+    <h2 class="mb-4 fw-bold text-custom-primary">Formulario: {{ conferencia.nombre }}</h2>
+
+    <form method="post" class="needs-validation" novalidate>
+      {% csrf_token %}
+
+      {% for pregunta, puntaje in preguntas_con_puntajes %}
+        <div class="mb-4">
+          <label class="form-label fw-semibold fs-5">{{ forloop.counter }}. {{ pregunta.texto }}</label>
+          <div>
+            {% for i in "12345" %}
+              <div class="form-check form-check-inline">
+                <input
+                  class="form-check-input"
+                  type="radio"
+                  name="respuesta_{{ pregunta.id }}"
+                  id="respuesta_{{ pregunta.id }}_{{ i }}"
+                  value="{{ i }}"
+                  required
+                  {% if puntaje|stringformat:"s" == i %}checked{% endif %}
+                >
+                <label class="form-check-label" for="respuesta_{{ pregunta.id }}_{{ i }}">{{ i }}</label>
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+      {% empty %}
+        <p class="text-muted">No hay preguntas disponibles para esta conferencia.</p>
+      {% endfor %}
+
+      <div class="mb-3">
+        <label>Retroalimentación</label>
+        <textarea name="retroalimentacion" class="form-control">{{ evaluacion.retroalimentacion }}</textarea>
+      </div>
+
+      {% if preguntas_con_puntajes %}
+        <button type="submit" class="btn btn-custom-primary rounded-pill px-4">
+          Enviar respuestas
+        </button>
+      {% endif %}
+    </form>
+  </div>
+
+  <script>
+    (() => {
+      'use strict'
+      const forms = document.querySelectorAll('.needs-validation')
+      Array.from(forms).forEach(form => {
+        form.addEventListener('submit', event => {
+          if (!form.checkValidity()) {
+            event.preventDefault()
+            event.stopPropagation()
+          }
+          form.classList.add('was-validated')
+        }, false)
+      })
+    })()
+  </script>
+{% endblock %}

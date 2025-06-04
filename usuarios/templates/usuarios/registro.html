@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+    <meta charset="UTF-8" />
+    <title>Registro</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #1A3E6F, #2C5D9F);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .card {
+            border: none;
+            border-radius: 20px;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+            background-color: #ffffffd9; /* blanco semitransparente */
+            backdrop-filter: blur(6px); /* efecto vidrio/difuminado */
+            padding: 35px;
+            width: 100%;
+            max-width: 500px;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        label {
+            display: block;
+            font-weight: normal;
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="password"],
+        select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 12px;
+            background-color: #f9f9f9;
+            transition: border-color 0.3s;
+        }
+
+        input:focus, select:focus {
+            border-color: #4a90e2;
+            outline: none;
+        }
+
+        .errorlist {
+            color: #c00;
+            margin-top: 5px;
+            font-size: 13px;
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #1A3E6F;
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-top: 10px;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #16355f;
+        }
+
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 15px;
+            color: #1A3E6F;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        .password-rules {
+            margin-top: 10px;
+            font-size: 13px;
+            color: #c00;
+            display: none;
+        }
+
+        .password-rules.active {
+            display: block;
+        }
+
+        .password-rules ul {
+            padding-left: 20px;
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h2 class="card-title text-center mb-4">Registro de usuario</h2>
+
+        <form method="post">
+            {% csrf_token %}
+
+            <div class="form-group">
+                <label for="id_nombre">Nombre</label>
+                {{ form.nombre }}
+                {{ form.nombre.errors }}
+            </div>
+
+            <div class="form-group">
+                <label for="id_apellidos">Apellidos</label>
+                {{ form.apellidos }}
+                {{ form.apellidos.errors }}
+            </div>
+
+            <div class="form-group">
+                <label for="id_email">Correo electrónico</label>
+                {{ form.email }}
+                {{ form.email.errors }}
+            </div>
+
+            <div class="form-group">
+                <label for="id_area_conocimiento">Área de conocimiento</label>
+                {{ form.area_conocimiento }}
+                {{ form.area_conocimiento.errors }}
+            </div>
+
+            <div class="form-group">
+                <label for="id_password1">Contraseña</label>
+                {{ form.password1 }}
+                {{ form.password1.errors }}
+                <div id="passwordRules" class="password-rules">
+                    <ul>
+                        <li>Mínimo 8 caracteres</li>
+                        <li>No completamente numérica</li>
+                        <li>No una clave común</li>
+                        <li>No similar a tu nombre/correo</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="id_password2">Confirmar contraseña</label>
+                {{ form.password2 }}
+                {{ form.password2.errors }}
+            </div>
+
+            {% if form.non_field_errors %}
+                <ul class="errorlist">
+                    {% for error in form.non_field_errors %}
+                        <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+
+            <button type="submit">Registrarse</button>
+        </form>
+
+        <a href="{% url 'login' %}" class="btn btn-link w-100">Volver al login</a>
+    </div>
+
+    <script>
+        const passwordInput = document.getElementById('id_password1');
+        const rulesBox = document.getElementById('passwordRules');
+
+        passwordInput.addEventListener('input', () => {
+            const val = passwordInput.value;
+            const isWeak = val.length < 8 || /^\d+$/.test(val);
+            rulesBox.classList.toggle('active', isWeak);
+        });
+    </script>
+</body>
+</html>

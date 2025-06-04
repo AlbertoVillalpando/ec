@@ -1,0 +1,149 @@
+{% extends "usuarios/vistaAdmin.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-4">
+  <h2 class="mb-4">Conferencias - Administrador</h2>
+  <a href="{% url 'crear_conferencia' %}" class="btn btn-custom-primary btn-sm">+ Nueva Conferencia</a>
+
+ <!-- Filtro por categoría -->
+  <form method="GET" class="mb-3">
+    <div class="row g-3 align-items-center">
+      <div class="col-auto">
+        <label for="categoria" class="col-form-label">Filtrar por Categoría:</label>
+      </div>
+      <div class="col-auto">
+      <select id="categoriaFiltro" class="form-select mb-3" onchange="filtrarPorCategoria()">
+        <option value="">Todas las categorías</option>
+      </select>
+      </div>
+    </div>
+  </form>
+
+
+  <div class="table-responsive">
+    <table class="table table-bordered align-middle table-hover">
+      <thead class="table-light">
+        <tr>
+          <th>Nombre</th>
+          <th>Duración</th>
+          <th>Organizador</th>
+          <th>Categoria</th>
+          <th>Autor</th>
+          <th class="text-center">Opciones</th>
+          <th class="text-center">Estado</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for conf in conferencias %}
+          <tr>
+            <td>{{ conf.nombre }}</td>
+            <td>{{ conf.meses }} meses, {{ conf.dias }} días, {{ conf.horas }} horas, {{ conf.minutos }} minutos</td>
+            <td>{{ conf.organizador.nombre }} {{ conf.organizador.apellidos }}</td>
+            <td>{{ conf.categoria }}</td>
+            <td>{{ conf.autor.nombre }} {{ conf.autor.apellidos }}</td>
+            <td class="text-center">
+              <div class="d-flex flex-wrap justify-content-center gap-2">
+                <a href="{% url 'crear_formulario' conf.id %}" class="btn btn-outline-success btn-sm">📝 Crear Formulario</a>
+                <a href="{% url 'ver_formulario' conf.id %}" class="btn btn-outline-info btn-sm">📄 Ver Formulario</a>
+                <a href="{% url 'editar_conferencia' conf.id %}" class="btn btn-outline-info btn-sm">📄 Editar conferencia</a>
+                <a href="{% url 'eliminar_conferencia' conf.id %}" class="btn btn-outline-info btn-sm">📄 Eliminar conferencia</a>
+                {% if conf.archivo_zip and conf.trabajo_reportado %}
+                <form method="POST" action="{% url 'eliminar_trabajo' conf.id %}" style="display:inline;">
+                  {% csrf_token %}
+                  <button type="submit" class="btn btn-danger btn-sm">🗑️ Eliminar trabajo</button>
+                </form>
+              {% endif %}
+              </div>
+            </td>
+            <td class="text-center">
+              <div id="estado-{{ conf.id }}">
+                {% if conf.estado_revision %}
+                  <span class="badge {% if conf.estado_revision == 'aceptado' %}bg-success{% else %}bg-danger{% endif %}">
+                    {{ conf.estado_revision|capfirst }}
+                  </span>
+                {% else %}
+                  <button class="btn btn-sm btn-outline-success" onclick="enviarDecision({{ conf.id }}, 'aceptado')">Aceptar</button>
+                  <button class="btn btn-sm btn-outline-danger" onclick="enviarDecision({{ conf.id }}, 'rechazado')">Rechazar</button>
+                {% endif %}
+              </div>
+            </td>
+          </tr>
+        {% empty %}
+          <tr>
+            <td colspan="6" class="text-center text-muted">No se han registrado conferencias hasta el momento.</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- Script AJAX para Aceptar/Rechazar -->
+<script>
+  // Extrae categorías únicas desde la tabla
+  document.addEventListener("DOMContentLoaded", function () {
+    const categoriaSet = new Set();
+    const filas = document.querySelectorAll("table tbody tr");
+
+    filas.forEach(fila => {
+      const categoria = fila.children[3]?.textContent.trim();
+      if (categoria) categoriaSet.add(categoria);
+    });
+
+    const select = document.getElementById("categoriaFiltro");
+    categoriaSet.forEach(cat => {
+      const option = document.createElement("option");
+      option.value = cat;
+      option.textContent = cat;
+      select.appendChild(option);
+    });
+  });
+
+  // Función de filtrado
+  function filtrarPorCategoria() {
+    const filtro = document.getElementById("categoriaFiltro").value;
+    const filas = document.querySelectorAll("table tbody tr");
+
+    filas.forEach(fila => {
+      const categoria = fila.children[3]?.textContent.trim();
+      if (!filtro || categoria === filtro) {
+        fila.style.display = "";
+      } else {
+        fila.style.display = "none";
+      }
+    });
+  }
+</script>
+
+
+<script>
+  function enviarDecision(conferenciaId, decision) {
+    fetch("{% url 'enviar_revision_conferencia' %}", {
+      method: "POST",
+      headers: {
+        "X-CSRFToken": "{{ csrf_token }}",
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        conferencia_id: conferenciaId,
+        decision: decision
+      })
+    })
+    .then(response => response.json())
+    .then(data => {
+      const divEstado = document.getElementById(`estado-${conferenciaId}`);
+      if (data.estado === "aceptado") {
+        divEstado.innerHTML = '<span class="badge bg-success">Aceptado</span>';
+      } else if (data.estado === "rechazado") {
+        divEstado.innerHTML = '<span class="badge bg-danger">Rechazado</span>';
+      } else {
+        alert("Ocurrió un error al guardar la decisión.");
+      }
+    })
+    .catch(error => {
+      console.error("Error al enviar la decisión:", error);
+    });
+  }
+</script>
+{% endblock %}

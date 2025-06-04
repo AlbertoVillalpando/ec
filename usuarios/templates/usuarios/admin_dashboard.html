@@ -1,0 +1,61 @@
+{% extends "usuarios/vistaAdmin.html" %}
+{% load static %}
+
+{% block title %}Panel de usuarios{% endblock %}
+{% block content %}
+<div class="container-fluid">
+  <div class="col-md-12">
+    <div class="card shadow-sm mb-4">
+      <div class="card-body">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <h4 class="fw-bold text-custom-primary">Lista de Usuarios</h4>
+        </div>
+        <div class="table-responsive">
+          <form method="POST" action="{% url 'actualizar_roles' %}">
+            {% csrf_token %}
+            <table class="table table-bordered align-middle">
+              <thead class="table-light">
+                <tr>
+                  <th>Nombre</th>
+                  <th>Apellido</th>
+                  <th>Área de Conocimiento</th>
+                  <th>Rol</th>
+                  <th>Organizador</th>
+                  <th>Revisor</th>
+                  <th>Administrador</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for user in users %}
+                <tr>
+                  <td>{{ user.nombre }}</td>
+                  <td>{{ user.apellidos }}</td>
+                  <td>{{ user.area_conocimiento }}</td>
+                  <td>
+                    {% for group in user.groups.all %}
+                      {{ group.name }}{% if not forloop.last %}, {% endif %}
+                    {% endfor %}
+                  </td>
+                  <td>
+                    <input type="checkbox" name="roles_{{ user.id }}_organizador" {% for g in user.groups.all %}{% if g.name == "Organizador" %}checked{% endif %}{% endfor %}>
+                  </td>
+                  <td>
+                    <input type="checkbox" name="roles_{{ user.id }}_revisor" {% for g in user.groups.all %}{% if g.name == "Revisor" %}checked{% endif %}{% endfor %}>
+                  </td>
+                  <td>
+                    <input type="checkbox" name="roles_{{ user.id }}_administrador" {% for g in user.groups.all %}{% if g.name == "Administrador" %}checked{% endif %}{% endfor %}>
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+            <div class="d-flex justify-content-end mt-3">
+              <button type="submit" class="btn btn-custom-primary">Guardar Cambios</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

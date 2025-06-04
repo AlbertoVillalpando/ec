@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %}Panel de Administrador{% endblock %}
+
+{% block headerpagina %}Panel de Administrador{% endblock %}
+
+{% block content %}
+<h1>Bienvenido, Administrador</h1>
+<p>Este es el panel de Administrador.</p>
+{% endblock %}
+
+{% block sidebar_extra %}
+    <li class="menu-item">
+    <a href="{% url 'conferencias_administrador' %}" class="menu-link">
+        <i class="menu-icon tf-icons bx bx-envelope text-dark"></i>
+        <div class="text-dark">Ver conferencias</div>
+    </a>
+    </li>
+    <li class="menu-item">
+    <a href="{% url 'admin_dashboard' %}" class="menu-link">
+        <i class="menu-icon tf-icons bx bx-envelope text-dark"></i>
+        <div class="text-dark">Usuarios</div>
+    </a>
+    </li>
+{% endblock %}

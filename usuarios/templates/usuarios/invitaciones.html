@@ -1,0 +1,51 @@
+{% extends 'usuarios/vistaAutor.html' %}
+
+{% load static %}
+{% block title %}Conferencias Invitadas{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="custom-card card shadow rounded-4 border-0">
+        <div class="card-body custom-card-body">
+            {% if invitaciones %}
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover custom-table mb-0">
+                    <thead class="custom-table-head">
+                        <tr>
+                            <th>Nombre de la Conferencia</th>
+                            <th class="text-center">Accion</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for invitacion in invitaciones %}
+                        <tr>
+                            <td class="align-middle">{{ invitacion.conferencia}}</td>
+                            <td class="align-middle text-center">
+                                <div class="d-flex justify-content-center flex-wrap gap-2">
+                                    {% if invitacion.estado == "pendiente" %}
+                                    <form method="post" action="{% url 'responder_invitacion' invitacion.id %}">
+                                        {% csrf_token %}
+                                        <button type="submit" name="respuesta" value="aceptar" class="btn btn-success btn-modern">Aceptar</button>
+                                        <button type="submit" name="respuesta" value="rechazar" class="btn btn-danger btn-modern">Rechazar</button>
+                                    </form>
+                                    {% elif invitacion.estado == "aceptado" %}
+                                        <a href="{% url 'conferencias_revisor' %}" class="btn btn-primary">Ver Conferencias</a>
+                                    {% elif invitacion.estado == "rechazado" %}
+                                    <span class="badge bg-secondary py-2 px-3 rounded-pill">Rechazada</span>
+                                    {% endif %}
+                                </div>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            {% else %}
+            <div class="alert alert-info text-center mt-4" role="alert">
+                No tienes invitaciones a conferencias por el momento.
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

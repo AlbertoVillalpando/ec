@@ -1,0 +1,78 @@
+{% extends 'usuarios/vistaRevisor.html' %}
+
+{% block title %}Conferencias como Revisor{% endblock %}
+
+{% block headerpagina %}Conferencias Asignadas como Revisor{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="mb-4">Conferencias que debes revisar</h2>
+
+    {% if conferencias %}
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Nombre de la Conferencia</th>
+                        <th>Duración</th>
+                        <th>Organizador</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for conferencia in conferencias %}
+                        <tr>
+                            <td>{{ conferencia.nombre }}</td>
+                            <td>
+                                {% if conferencia.meses %}{{ conferencia.meses }} mes(es) {% endif %}
+                                {% if conferencia.dias %}{{ conferencia.dias }} día(s) {% endif %}
+                                {% if conferencia.horas %}{{ conferencia.horas }} hora(s) {% endif %}
+                                {% if conferencia.minutos %}{{ conferencia.minutos }} minuto(s){% endif %}
+                            </td>
+                            <td>{{ conferencia.organizador.nombre }} {{ conferencia.organizador.apellidos }}</td>
+                            <td>
+                                {% if conferencia.archivo_zip %}
+                                    <a href="{{ conferencia.archivo_zip.url }}" class="btn btn-sm btn-primary mb-1">Descargar ZIP</a>
+
+                                    {% if not conferencia.trabajo_reportado %}
+                                        <button class="btn btn-sm btn-warning mb-1" onclick="reportarTrabajo({{ conferencia.id }})">Reportar el trabajo</button>
+                                    {% else %}
+                                        <span class="text-success">Trabajo reportado</span>
+                                    {% endif %}
+                                {% endif %}
+
+                                <a href="{% url 'evaluar_conferencia' conferencia.id %}" class="btn btn-sm btn-success mb-1">Evaluar</a>
+                                <a href="{% url 'ver_evaluacion' conferencia.id %}" class="btn btn-sm btn-info mb-1">Ver Evaluación</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% else %}
+        <div class="alert alert-info">No tienes conferencias asignadas como revisor.</div>
+    {% endif %}
+</div>
+
+<script>
+function reportarTrabajo(conferenciaId) {
+    fetch("{% url 'reportar_trabajo' %}", {
+        method: "POST",
+        headers: {
+            "X-CSRFToken": "{{ csrf_token }}",
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ conferencia_id: conferenciaId })
+    })
+    .then(res => res.json())
+    .then(data => {
+        if (data.status === "ok") {
+            location.reload();  // recarga para mostrar el mensaje
+        } else {
+            alert("Error al reportar el trabajo.");
+        }
+    });
+}
+</script>
+
+{% endblock %}

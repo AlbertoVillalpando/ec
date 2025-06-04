@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block title %}Panel de Organizador{% endblock %}
+
+{% block headerpagina %}Panel de Organizador{% endblock %}
+
+{% block content %}
+<h1>Bienvenido, Organizador</h1>
+<p>Este es el panel de Organizador.</p>
+{% endblock %}
+
+{% block sidebar_extra %}
+    <li class="menu-item">
+    <a href="{% url 'conferencias_organizador' %}" class="menu-link">
+        <i class="menu-icon tf-icons bx bx-envelope text-dark"></i>
+        <div class="text-dark">Ver conferencias</div>
+    </a>
+    </li>
+{% endblock %}
+

@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %}Panel de Autor{% endblock %}
+
+{% block headerpagina %}Panel de Autor{% endblock %}
+
+{% block content %}
+<h1>Bienvenido, Autor</h1>
+<p>Este es el panel de Autor.</p>
+{% endblock %}
+
+{% block sidebar_extra %}
+    <li class="menu-item">
+    <a href="{% url 'invitaciones_autor' %}" class="menu-link">
+        <i class="menu-icon tf-icons bx bx-envelope text-dark"></i>
+        <div class="text-dark">Ver invitaciones</div>
+    </a>
+    </li>
+    <li class="menu-item">
+    <a href="{% url 'conferencias_autor' %}" class="menu-link">
+        <i class="menu-icon tf-icons bx bx-envelope text-dark"></i>
+        <div class="text-dark">Ver conferencias</div>
+    </a>
+    </li>
+{% endblock %}
+

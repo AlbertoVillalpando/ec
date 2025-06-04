@@ -1,0 +1,40 @@
+{% extends "usuarios/vistaOrganizador.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-4">
+  <h2 class="mb-4">Conferencias - Organizador</h2>
+
+  <div class="table-responsive">
+    <table class="table table-bordered align-middle table-hover">
+      <thead class="table-light">
+        <tr>
+          <th>Nombre</th>
+          <th>Duración</th>
+          <th>Autor</th>
+          <th class="text-center">Opciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for conf in conferencias %}
+          <tr>
+            <td>{{ conf.nombre }}</td>
+            <td>{{ conf.meses }} meses, {{ conf.dias }} días, {{ conf.horas }} horas, {{ conf.minutos }} minutos</td>
+            <td>{{ conf.organizador.get_full_name }}</td>
+            <td>{{ conf.autor.get_full_name }}</td>
+            <td class="text-center">
+              <div class="d-flex flex-wrap justify-content-center gap-2">
+                <a href="{% url 'invitaciones_conferencia' conf.id %}" class="btn btn-outline-custom btn-sm">✉️ Invitaciones</a>
+              </div>
+            </td>
+          </tr>
+        {% empty %}
+          <tr>
+            <td colspan="6" class="text-center text-muted">No se han registrado conferencias hasta el momento.</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

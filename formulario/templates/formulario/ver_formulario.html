@@ -1,0 +1,20 @@
+{% extends "usuarios/vistaAdmin.html" %}
+
+{% block content %}
+  <div class="container mt-4">
+    <h2 class="mb-4 fw-bold text-custom-primary">Formulario: {{ conferencia.nombre }}</h2>
+
+    <form method="post" class="needs-validation" novalidate>
+      {% csrf_token %}
+
+      {% for pregunta in preguntas %}
+        <div class="mb-4">
+          <label class="form-label fw-semibold fs-5">{{ forloop.counter }}. {{ pregunta.texto }}</label>
+          
+        </div>
+      {% empty %}
+        <p class="text-muted">No hay preguntas disponibles para esta conferencia.</p>
+      {% endfor %}
+    </form>
+  </div>
+{% endblock %}

@@ -1,0 +1,16 @@
+<!-- notificaciones/templates/notificaciones/_dropdown.html -->
+{% if notificaciones %}
+  {% for notificacion in notificaciones %}
+    <li>
+      <a class="dropdown-item{% if not notificacion.leido %} fw-bold{% endif %}" href="#">
+        {{ notificacion.mensaje|truncatechars:50 }}
+        <br>
+        <small class="text-muted">{{ notificacion.fecha|date:"d/m/Y H:i" }}</small>
+      </a>
+    </li>
+  {% endfor %}
+{% else %}
+  <li>
+    <span class="dropdown-item text-muted">Sin notificaciones nuevas</span>
+  </li>
+{% endif %}

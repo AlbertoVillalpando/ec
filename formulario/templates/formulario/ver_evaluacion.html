@@ -1,0 +1,27 @@
+{% extends 'usuarios/vistaRevisor.html' %}
+
+{% block content %}
+<div class="container mt-4">
+  <h4>Evaluaciones de la conferencia: {{ conferencia.nombre }}</h4>
+
+  {% if evaluaciones %}
+    {% for evaluacion in evaluaciones %}
+      <div class="card mb-3">
+        <div class="card-header">Evaluación #{{ forloop.counter }}</div>
+        <div class="card-body">
+          <ul>
+            {% for respuesta in evaluacion.respuestas.all %}
+              <li><strong>{{ respuesta.pregunta.texto }}</strong>: {{ respuesta.puntaje }}</li>
+            {% endfor %}
+          </ul>
+          {% if evaluacion.retroalimentacion %}
+            <p><strong>Retroalimentación:</strong> {{ evaluacion.retroalimentacion }}</p>
+          {% endif %}
+        </div>
+      </div>
+    {% endfor %}
+  {% else %}
+    <p>No hay evaluaciones registradas para esta conferencia.</p>
+  {% endif %}
+</div>
+{% endblock %}

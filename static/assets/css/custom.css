@@ -1,0 +1,235 @@
+/* static/assets/css/custom.css */
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #F5F5F5;
+}
+
+.layout-navbar {
+  color: white;
+  background-color: #1A3E6F !important;
+}
+
+.layout-navbar .navbar-brand,
+.layout-navbar .nav-link,
+.layout-navbar span {
+  color: white !important;
+}
+
+.layout-navbar .nav-link:hover {
+  text-decoration: underline;
+}
+
+.layout-menu {
+  background-color: #385d91 !important;
+}
+
+.layout-menu .menu-link {
+  color: white !important;
+  font-weight: 500;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.layout-menu .menu-link:hover {
+  background-color: #3A5A87;
+  border-left: 3px solid #E67E22;
+}
+
+.menu-icon {
+  margin-right: 0.5rem;
+}
+
+.container-xxl {
+  background-color: #ffffff;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.footer {
+  background-color: #1A3E6F !important;
+  color: white;
+}
+
+footer a {
+  color: #ccc;
+  margin: 0 0.5rem;
+}
+
+footer a:hover {
+  color: white;
+}
+
+
+
+.circle {
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
+  border-radius: 50%;
+  display: inline-block;
+  text-align: center;
+  font-weight: bold;
+}
+
+.text-custom-primary {
+  color: #1A3E6F !important;
+}
+
+.bg-custom-primary {
+  background-color: #1A3E6F !important;
+}
+
+.btn-custom-primary {
+  background-color: #1A3E6F;
+  color: white;
+  border: none;
+}
+
+.btn-custom-primary:hover {
+  background-color: #16365D;
+}
+
+/************************** Estilo conferencia *******************************/
+:root {
+  --color-primario: #1b1f3b;
+  --color-secundario: #6c757d;
+  --color-exito: #198754;
+  --color-info: #0dcaf0;
+  --color-borde: #e0e0e0;
+}
+
+/* Colores de texto */
+.text-custom-primary {
+  color: var(--color-primario);
+}
+
+/* Boton principal */
+.btn-custom-primary {
+  background-color: var(--color-primario);
+  color: white;
+  border: none;
+  font-weight: 500;
+}
+
+.btn-custom-primary:hover {
+  background-color: #101324;
+  color: white;
+}
+
+/* Botones con relleno visible desde el inicio */
+.btn-outline-custom,
+.btn-outline-success,
+.btn-outline-secondary,
+.btn-outline-info,
+.btn-outline-primary {
+  color: white !important;
+  font-weight: 500;
+}
+
+/* Colores visibles en todo momento */
+.btn-outline-custom {
+  background-color: var(--color-primario);
+  border-color: var(--color-primario);
+}
+
+.btn-outline-success {
+  background-color: var(--color-exito);
+  border-color: var(--color-exito);
+}
+
+.btn-outline-secondary {
+  background-color: var(--color-secundario);
+  border-color: var(--color-secundario);
+}
+
+.btn-outline-info {
+  background-color: var(--color-info);
+  border-color: var(--color-info);
+}
+
+.btn-outline-primary {
+  background-color: #0d6efd;
+  border-color: #0d6efd;
+}
+
+/* Hover */
+.btn-outline-custom:hover,
+.btn-outline-success:hover,
+.btn-outline-secondary:hover,
+.btn-outline-info:hover,
+.btn-outline-primary:hover {
+  opacity: 1.9;
+}
+
+.btn-sm {
+  font-size: 0.8rem;
+  padding: 0.35rem 0.75rem;
+  border-radius: 20px;
+}
+
+/* Estetica de tabla y tarjetas */
+.table thead th {
+  background-color: #f8f9fa;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.card {
+  border-radius: 0.75rem;
+  border: 1px solid var(--color-borde);
+}
+
+.card-body {
+  padding: 2rem;
+}
+
+.alert {
+  border-radius: 0.5rem;
+  font-size: 0.9rem;
+}
+
+
+.custom-card {
+  background: #f8fafc;
+  border-radius: 1rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+}
+
+.custom-card-body {
+  padding: 2rem;
+  background: #f0f4ff;
+  border-radius: 0.75rem;
+}
+
+.custom-table {
+  border-radius: 0.5rem;
+  overflow: hidden;
+  font-size: 0.95rem;
+}
+
+.custom-table thead.custom-table-head {
+  background-color: #dbeafe;
+  color: #1e3a8a;
+}
+
+.custom-table th, .custom-table td {
+  vertical-align: middle;
+  padding: 1rem;
+}
+
+.btn-modern {
+  border-radius: 999px;
+  font-weight: 500;
+  padding: 0.4rem 1.2rem;
+  transition: all 0.3s ease-in-out;
+}
+
+.btn-modern:hover {
+  opacity: 0.9;
+  transform: scale(1.03);
+}
+
+.table-hover tbody tr:hover {
+  background-color: #f0f9ff;
+}
